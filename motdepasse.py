@@ -33,20 +33,17 @@ def hasher(str):
     hach = hashlib.sha256(str.encode(encoding='utf-8')).hexdigest()
     return hach
 mdp = hasher(password())
-database = mdp
-motdepasse={"mdp":mdp}
+new_mdp = {"mdp":mdp}
+mot_depasse={"mdp":mdp}
 with open("database.json","r+")as write:
     donnee = json.load(write)
-    donnee["motdepasse"].append(motdepasse)
-    write.seek(0)
-    json.dump(donnee, write,indent=4)
-def pasword_double():
-    with open("database.json","r")as f:
-        double = json.load(f)
-        if motdepasse in donnee["motdepasse"]:
-            print("mot de passe deja rentre")
-pasword_double()
-            
+    if new_mdp in donnee["motdepasse"]: 
+        print("mot de passe deja rentre") 
+    else:
+        donnee["motdepasse"].append(mot_depasse)
+        write.seek(0)
+        json.dump(donnee, write,indent=4) 
+    
 
 
 
